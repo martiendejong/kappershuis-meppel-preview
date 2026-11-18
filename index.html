@@ -1,0 +1,532 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kappershuis Meppel · voorbeeld</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --green-900:#1c3a2d; --green-700:#2d5a45; --green-500:#4f8a6c;
+  --rose-200:#f3dfd6; --rose-400:#d99a86;
+  --cream:#faf6f2; --white:#fff; --ink:#1b2620; --muted:#5d6a63;
+  --live:#3aa56b; --radius:22px;
+  --serif:'Fraunces',Georgia,serif; --sans:'DM Sans',system-ui,sans-serif;
+}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);color:var(--ink);background:var(--cream);line-height:1.55;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.1}
+h1 em,h2 em{font-style:italic}
+.eyebrow{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--green-500)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;font:700 .95rem var(--sans);border-radius:999px;padding:.85rem 1.5rem;border:1.5px solid transparent;cursor:pointer;text-decoration:none;transition:transform .15s,background .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--green-700);color:#fff}
+.btn-primary:hover{background:var(--green-900)}
+.btn-light{background:#fff;color:var(--green-900)}
+.btn-ghost{border-color:rgba(255,255,255,.6);color:#fff}
+.btn-outline{border-color:var(--green-700);color:var(--green-700);background:transparent}
+:focus-visible{outline:3px solid var(--rose-400);outline-offset:2px}
+
+/* header */
+header{position:sticky;top:0;z-index:50;background:rgba(250,246,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}
+.nav{display:flex;align-items:center;gap:20px;height:68px}
+.logo{font:700 1.15rem var(--sans);letter-spacing:.04em;text-decoration:none;color:var(--green-900);display:flex;align-items:center;gap:10px}
+.logo i{display:inline-flex;gap:3px}.logo i b{width:9px;height:9px;border-radius:50%;background:var(--rose-400)}
+.nav nav{margin-left:auto;display:flex;gap:22px;font-size:.92rem;font-weight:500}
+.nav nav a{text-decoration:none;color:var(--muted)}.nav nav a:hover{color:var(--green-900)}
+.pill-live{display:inline-flex;align-items:center;gap:8px;font:700 .82rem var(--sans);padding:.5rem .9rem;border-radius:999px;background:#e6f3ec;color:var(--green-900);text-decoration:none}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(58,165,107,.6);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px rgba(58,165,107,0)}100%{box-shadow:0 0 0 0 rgba(58,165,107,0)}}
+.cartbtn{position:relative;background:none;border:1.5px solid rgba(0,0,0,.12);border-radius:999px;width:42px;height:42px;cursor:pointer;display:grid;place-items:center;font-size:1.05rem}
+.cartbtn span[hidden]{display:none}
+.cartbtn span{position:absolute;top:-6px;right:-6px;background:var(--rose-400);color:#fff;border-radius:999px;font:700 .68rem var(--sans);min-width:19px;height:19px;display:grid;place-items:center;padding:0 4px}
+
+/* hero */
+.hero{position:relative;color:#fff;overflow:hidden;background:var(--green-900)}
+.hero-bg{position:absolute;inset:0;background:url(img/hero.jpg) right center/cover}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(95deg,rgba(18,38,29,.95) 0%,rgba(18,38,29,.7) 40%,rgba(18,38,29,.08) 100%)}
+.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-top:56px;padding-bottom:64px}
+.hero h1{font-size:clamp(2.4rem,5vw,4rem);margin:14px 0 18px}
+.hero h1 em{color:var(--rose-200)}
+.hero p.lead{max-width:30rem;color:rgba(255,255,255,.88);font-size:1.05rem}
+.assist{display:flex;align-items:flex-end;gap:14px;margin-top:34px}
+.avatar{flex:none;width:92px;height:92px;border-radius:50%;background:linear-gradient(160deg,var(--rose-200),var(--rose-400));border:3px solid rgba(255,255,255,.85);display:grid;place-items:center;overflow:hidden;position:relative}
+.avatar svg{width:70%;height:70%}
+.bubble{background:#fff;color:var(--ink);border-radius:18px 18px 18px 4px;padding:12px 16px;max-width:19rem;font-size:.95rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.bubble b{color:var(--green-700)}
+.bubble button{margin-top:8px;margin-right:6px;font:700 .78rem var(--sans);border:1.5px solid var(--green-700);color:var(--green-700);background:transparent;border-radius:999px;padding:.3rem .7rem;cursor:pointer}
+.bubble button:hover{background:var(--green-700);color:#fff}
+
+/* queue card */
+.queue{background:#fff;color:var(--ink);border-radius:var(--radius);padding:22px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+.q-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.q-head h2{font-size:1.55rem;display:flex;align-items:center;gap:10px}
+.live{display:inline-flex;align-items:center;gap:7px;font:700 .75rem var(--sans);background:#e6f3ec;color:var(--green-900);padding:.3rem .7rem;border-radius:999px}
+.q-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.q-stat{background:var(--cream);border-radius:14px;padding:10px 14px}
+.q-stat strong{display:block;font:500 1.8rem var(--serif);color:var(--green-900);line-height:1.1}
+.q-stat span{font-size:.8rem;color:var(--muted)}
+.q-line{display:flex;align-items:center;gap:6px;margin:16px 0 6px;min-height:58px;overflow-x:auto}
+.seat{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:700 .85rem var(--sans);background:var(--rose-200);color:var(--green-900);border:2px solid #fff;box-shadow:0 0 0 1.5px var(--rose-200);position:relative;transition:all .4s}
+.seat.you{background:var(--green-700);color:#fff;box-shadow:0 0 0 2px var(--green-700)}
+.seat.you::after{content:"Jij";position:absolute;top:-19px;left:50%;transform:translateX(-50%);font-size:.68rem;background:var(--green-700);color:#fff;padding:1px 7px;border-radius:999px}
+.seat.empty{background:transparent;border:2px dashed #d8d2cb;box-shadow:none;color:#c0b9b1}
+.chairs{display:flex;gap:8px;height:2.2rem;align-items:center}
+.chairs i{width:22px;height:22px;border-radius:50%;border:2px solid var(--green-500);background:transparent}
+.chairs i.busy{background:var(--green-700);border-color:var(--green-700)}
+.q-link{width:10px;height:2px;background:#e3ddd6;flex:none}
+.q-eta{display:flex;justify-content:space-between;align-items:center;background:var(--cream);border-radius:14px;padding:10px 14px;margin:10px 0 14px;font-size:.92rem}
+.q-eta b{font:500 1.15rem var(--serif);color:var(--green-900)}
+.q-join{width:100%;font-size:1.02rem;padding:1rem}
+.q-form{display:none;gap:8px;margin-top:0}
+.q-form.open{display:flex}
+.q-form input{flex:1;min-width:0;font:500 1rem var(--sans);border:1.5px solid #d8d2cb;border-radius:999px;padding:.8rem 1.1rem}
+.q-note{font-size:.76rem;color:var(--muted);margin-top:10px;text-align:center}
+.q-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.q-actions .btn{border-radius:16px;justify-content:space-between;padding:.9rem 1.1rem}
+.btn-shop{background:var(--rose-200);color:var(--green-900)}
+
+/* sections */
+section{padding:80px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:34px;flex-wrap:wrap}
+.sec-head h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-top:8px}
+.sec-head h2 em{color:var(--green-500)}
+.more{font-weight:700;font-size:.9rem;color:var(--green-700)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card .ph{position:relative;border-radius:var(--radius);overflow:hidden;aspect-ratio:4/4.4}
+.card .ph img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.card:hover .ph img{transform:scale(1.04)}
+.card .from{position:absolute;left:12px;bottom:12px;background:#fff;border-radius:999px;font:700 .75rem var(--sans);padding:.3rem .75rem}
+.card h3{font-size:1.3rem;margin:14px 0 4px}
+.card p{font-size:.88rem;color:var(--muted)}
+
+.walkin{background:var(--green-900);color:#fff}
+.walkin .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:56px;align-items:center}
+.arch{border-radius:999px 999px 0 0;overflow:hidden;aspect-ratio:3/3.4}
+.arch img{width:100%;height:100%;object-fit:cover;filter:grayscale(1)}
+.walkin h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin:10px 0 14px}
+.walkin h2 em{color:var(--rose-200)}
+.walkin .eyebrow{color:#8fd0ad}
+.hours{background:rgba(255,255,255,.08);border-radius:18px;padding:8px 20px;margin:22px 0;display:grid;grid-template-columns:1fr 1fr;column-gap:32px}
+.hours div{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.1);font-size:.9rem}
+.hours div.today{color:#8fd0ad;font-weight:700}
+.btnrow{display:flex;gap:12px;flex-wrap:wrap}
+
+/* shop */
+.shop-box{background:#fff;border-radius:28px;padding:40px;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.shop-top{display:grid;grid-template-columns:.9fr 1.1fr;gap:36px;align-items:center;margin-bottom:34px}
+.shop-top img{border-radius:var(--radius);width:100%}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.tags span{background:var(--cream);border-radius:999px;padding:.35rem .9rem;font-size:.82rem;font-weight:500}
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.prod{background:var(--cream);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:6px}
+.prod .tube{height:92px;border-radius:12px;margin-bottom:6px;display:grid;place-items:center}
+.prod .tube i{display:block;width:34px;height:70px;border-radius:9px 9px 6px 6px;position:relative}
+.prod .tube i::before{content:"";position:absolute;left:8px;right:8px;top:-9px;height:9px;background:#9aa0a6;border-radius:3px 3px 0 0}
+.prod h3{font:700 .95rem var(--sans)}
+.prod small{color:var(--muted);font-size:.8rem}
+.prod .row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px}
+.prod .price{font:500 1.2rem var(--serif)}
+.add{border:1.5px solid var(--green-700);background:transparent;color:var(--green-700);font:700 .8rem var(--sans);border-radius:999px;padding:.45rem .9rem;cursor:pointer}
+.add:hover,.add.added{background:var(--green-700);color:#fff}
+
+/* reviews */
+.reviews{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.rev{background:#fff;border-radius:var(--radius);padding:22px;display:flex;flex-direction:column;gap:14px}
+.rev q{font:400 1.05rem var(--serif);quotes:"“" "”"}
+.rev footer{display:flex;justify-content:space-between;margin-top:auto;border-top:1px solid #eee;padding-top:10px;font-size:.82rem;font-weight:700}
+.rev footer span{color:var(--rose-400)}
+
+.cta{border-radius:28px;overflow:hidden;position:relative;color:#fff;padding:70px 48px;background:var(--green-900)}
+.cta::before{content:"";position:absolute;inset:0;background:url(img/wash.jpg) center/cover;opacity:.45}
+.cta>*{position:relative}
+.cta h2{font-size:clamp(1.9rem,3.4vw,2.7rem);margin-bottom:10px}
+.cta h2 em{color:var(--rose-200)}
+.cta p{margin-bottom:22px;max-width:30rem}
+
+footer.site{background:var(--cream);border-top:1px solid rgba(0,0,0,.07);padding:56px 0 100px;font-size:.9rem}
+footer.site .cols{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px}
+footer.site h3{font-size:1.05rem;margin-bottom:10px}
+footer.site p{color:var(--muted)}
+.copy{margin-top:34px;padding-top:18px;border-top:1px solid rgba(0,0,0,.07);font-size:.8rem;color:var(--muted)}
+
+/* cart drawer */
+.drawer{visibility:hidden;position:fixed;top:0;right:0;bottom:0;width:min(380px,100%);background:#fff;z-index:90;transform:translateX(100%);transition:transform .3s;padding:24px;display:flex;flex-direction:column;box-shadow:-20px 0 50px rgba(0,0,0,.18)}
+.drawer.open{transform:none;visibility:visible}
+.drawer h2{font-size:1.5rem;margin-bottom:16px}
+.drawer ul{list-style:none;padding:0;flex:1;overflow:auto}
+.drawer li{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #eee;font-size:.92rem}
+.drawer li button{border:0;background:none;color:var(--muted);cursor:pointer;font-size:.8rem;text-decoration:underline}
+.total{display:flex;justify-content:space-between;font:500 1.3rem var(--serif);margin:16px 0}
+.close{position:absolute;top:14px;right:16px;background:none;border:0;font-size:1.6rem;cursor:pointer}
+.empty-cart{color:var(--muted);padding:20px 0}
+
+.demo-tag{position:fixed;left:14px;bottom:14px;z-index:60;background:var(--ink);color:#fff;font:700 .72rem var(--sans);padding:.4rem .8rem;border-radius:999px;opacity:.85}
+.mbar{display:none}
+.bubble .chatbtn{background:var(--green-700);color:#fff}
+.chat{padding:0!important;position:fixed;right:20px;bottom:20px;width:370px;max-width:calc(100% - 24px);height:520px;max-height:calc(100% - 100px);z-index:95;background:#fff;border-radius:22px;box-shadow:0 30px 70px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden}
+.chat[hidden]{display:none}
+.chat-head{display:flex;align-items:center;gap:12px;padding:14px 16px;background:var(--green-900);color:#fff}
+.chat-head .avatar{width:42px;height:42px;border-width:2px}
+.chat-head small{display:flex;align-items:center;gap:6px;opacity:.85;font-size:.76rem}
+.chat-head button{margin-left:auto;background:none;border:0;color:#fff;font-size:1.6rem;cursor:pointer}
+.chat-log{flex:1;overflow:auto;padding:16px;display:flex;flex-direction:column;gap:10px;background:var(--cream)}
+.msg{max-width:84%;padding:10px 14px;border-radius:16px;font-size:.92rem;line-height:1.45;white-space:pre-line}
+.msg.bot{background:#fff;border-bottom-left-radius:4px;align-self:flex-start;box-shadow:0 1px 0 rgba(0,0,0,.05)}
+.msg.me{background:var(--green-700);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.msg a{color:var(--green-700);font-weight:700}
+.chat-chips{display:flex;gap:6px;flex-wrap:wrap;padding:8px 12px 0;background:#fff}
+.chat-chips button{font:700 .76rem var(--sans);border:1.5px solid var(--green-700);color:var(--green-700);background:transparent;border-radius:999px;padding:.3rem .7rem;cursor:pointer}
+.chat-chips button:hover{background:var(--green-700);color:#fff}
+.chat-form{display:flex;gap:8px;padding:12px;background:#fff}
+.chat-form input{flex:1;min-width:0;font:500 .95rem var(--sans);border:1.5px solid #d8d2cb;border-radius:999px;padding:.7rem 1rem}
+.chat-form .btn{padding:.7rem 1.1rem}
+@media(max-width:900px){.chat{right:8px;left:8px;width:auto;max-width:none;bottom:76px;height:min(70vh,520px)}}
+
+@media(max-width:900px){
+  .nav nav{display:none}.nav{gap:10px}.nav .pill-live{margin-left:auto}.hide-sm{display:none}
+  .hero .wrap{grid-template-columns:1fr;gap:28px;padding-top:36px;padding-bottom:40px}
+  .hero-bg::after{background:linear-gradient(180deg,rgba(18,38,29,.86),rgba(18,38,29,.7))}
+  .assist{margin-top:22px}
+  .cards,.products,.reviews{grid-template-columns:1fr 1fr}
+  .walkin .wrap,.shop-top{grid-template-columns:1fr;gap:28px}
+  .arch{max-width:420px}
+  section{padding:56px 0}
+  .shop-box{padding:22px}
+  .cta{padding:44px 24px}
+  footer.site .cols{grid-template-columns:1fr 1fr}
+  .mbar{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:70;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(250,246,242,.96);backdrop-filter:blur(10px);border-top:1px solid rgba(0,0,0,.08)}
+  .mbar a{font:700 .8rem var(--sans);text-align:center;text-decoration:none;padding:.75rem .4rem;border-radius:14px;background:var(--cream);color:var(--green-900);border:1.5px solid rgba(0,0,0,.08)}
+  .mbar a.p{background:var(--green-700);color:#fff;border-color:var(--green-700)}
+  .demo-tag{display:none}
+}
+@media(max-width:520px){
+  .hours{grid-template-columns:1fr}
+  .cards{gap:12px}.products{grid-template-columns:1fr 1fr;gap:10px}.reviews{grid-template-columns:1fr}
+  .wrap{padding:0 16px}
+  .bubble{max-width:none}
+  .hero p.lead{display:none}
+  .avatar{width:72px;height:72px}
+}
+
+/* queue: tekst op transparante achtergrond, foto meer zichtbaar */
+.queue{background:transparent;color:#fff;box-shadow:none;padding:8px 0;text-shadow:0 1px 12px rgba(0,0,0,.55)}
+.queue .live{background:rgba(255,255,255,.14);color:#fff}
+.q-head h2{color:#fff}
+.q-stat,.q-eta{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.28);border-radius:0;padding-left:0;padding-right:0}
+.q-stat strong,.q-eta b{color:#fff}
+.q-stat span,.q-note,.q-eta span{color:rgba(255,255,255,.85)}
+.chairs i{border-color:#fff}.chairs i.busy{background:#fff;border-color:#fff}
+.seat{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.85);box-shadow:none}
+.seat.empty{border:2px dashed rgba(255,255,255,.4);color:rgba(255,255,255,.45)}
+.seat.you{background:var(--rose-200);color:var(--green-900);border-color:var(--rose-200);box-shadow:none;text-shadow:none}
+.seat.you::after{background:var(--rose-200);color:var(--green-900);text-shadow:none;top:-21px}
+.q-link{background:rgba(255,255,255,.35)}
+.q-line{padding-top:22px;margin-top:8px}
+.queue .btn-primary{background:#fff;color:var(--green-900);text-shadow:none}
+.queue .btn-primary:disabled{opacity:1}
+.q-form input{background:rgba(255,255,255,.92)}
+.q-actions .btn-light{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.7)!important;text-shadow:none}
+.q-actions .btn-shop{background:rgba(243,223,214,.95);text-shadow:none}
+.hero-bg::after{background:linear-gradient(95deg,rgba(18,38,29,.82) 0%,rgba(18,38,29,.5) 42%,rgba(18,38,29,.12) 100%)}
+@media(max-width:900px){.hero-bg::after{background:linear-gradient(180deg,rgba(18,38,29,.7),rgba(18,38,29,.5))}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#top"><i><b></b><b></b><b></b></i>KAPPERSHUIS</a>
+    <nav aria-label="Hoofdmenu">
+      <a href="#behandelingen">Behandelingen</a>
+      <a href="#prijzen">Prijzen</a>
+      <a href="#webshop">Webshop</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="pill-live" href="#wachtrij"><span class="dot"></span><span id="pillTxt">Wachtrij</span></a>
+    <button class="cartbtn" id="cartOpen" aria-label="Winkelmand"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span id="cartCount" hidden>0</span></button>
+    <a class="btn btn-primary hide-sm" href="#afspraak">Afspraak maken</a>
+  </div>
+</header>
+
+<main id="top">
+<!-- HERO: avatar + live wachtrij + afspraak + webshop -->
+<div class="hero">
+  <div class="hero-bg" role="img" aria-label="Kappershuis aan het Prinsenplein in Meppel"></div>
+  <div class="wrap">
+    <div>
+      <div class="eyebrow" style="color:#8fd0ad">Kapsalon in hartje Meppel</div>
+      <h1>Passie, kwaliteit <em>&amp; vakmanschap</em></h1>
+      <p class="lead">Bij Kappershuis word je op je eigen manier geholpen door ervaren kappers. Loop gewoon binnen, plan vooraf een moment of neem plaats in de wachtrij.</p>
+      <div class="assist">
+        <div class="avatar" aria-hidden="true" title="Plaats voor de Kappershuis-avatar">
+          <svg viewBox="0 0 64 64" fill="none" stroke="#1c3a2d" stroke-width="3" stroke-linecap="round"><circle cx="20" cy="46" r="7"/><circle cx="44" cy="46" r="7"/><path d="M25 41 44 12M39 41 20 12"/></svg>
+        </div>
+        <div class="bubble" id="bubble">
+          Hoi! Ik help je kiezen: <b>wachten</b>, <b>afspraak</b> of <b>producten</b>.
+          <div>
+            <button data-go="wachtrij">Hoe druk is het?</button>
+            <button data-go="afspraak">Afspraak</button>
+            <button data-go="webshop">Producten</button>
+            <button class="chatbtn" id="chatOpen">💬 Chat</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="queue" id="wachtrij" aria-label="Live wachtrij">
+      <div class="q-head">
+        <h2>Wachtrij</h2>
+        <span class="live"><span class="dot"></span>Live</span>
+      </div>
+      <div class="q-stats">
+        <div class="q-stat"><strong id="qWait">3</strong><span>wachtenden</span></div>
+        <div class="q-stat"><div class="chairs" id="qChairs" aria-hidden="true"></div><span id="qFreeTxt">1 vrije stoel</span></div>
+      </div>
+      <div class="q-line" id="qLine" aria-label="Positie in de wachtrij"></div>
+      <div class="q-eta"><span>Geschatte wachttijd</span><b id="qEta">18 min</b></div>
+      <button class="btn btn-primary q-join" id="qJoinBtn">+ Plaatsnemen</button>
+      <form class="q-form" id="qForm">
+        <input id="qName" type="text" placeholder="Je voornaam" maxlength="20" aria-label="Je voornaam" required>
+        <button class="btn btn-primary" type="submit">Bevestig</button>
+      </form>
+      <p class="q-note" id="qNote">Geen account nodig. We sturen je een seintje als je bijna aan de beurt bent.</p>
+      <div class="q-actions">
+        <a class="btn btn-light" style="border-color:#e3ddd6" href="#afspraak" id="afspraakBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Afspraak maken</a>
+        <a class="btn btn-shop" href="#webshop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg> Webshop</a>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<section id="behandelingen">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><div class="eyebrow">Behandelingen</div><h2>Van snelle knipbeurt tot <em>complete metamorfose</em></h2></div>
+      <a class="more" href="#prijzen">Alle prijzen bekijken →</a>
+    </div>
+    <div class="cards">
+      <article class="card"><div class="ph"><img src="img/c_dames.jpg" alt="Föhnen en knippen dames" loading="lazy"><span class="from">vanaf € 26,00</span></div><h3>Knippen dames</h3><p>Knippen, wassen en drogen. Ook 65+-tarief.</p></article>
+      <article class="card"><div class="ph"><img src="img/c_heren.jpg" alt="Heren knippen" loading="lazy"><span class="from">vanaf € 15,00</span></div><h3>Heren &amp; baard</h3><p>Knippen, tondeuse, baard trimmen en contouren.</p></article>
+      <article class="card"><div class="ph"><img src="img/c_kleur.jpg" alt="Kleuren en balayage" loading="lazy"><span class="from">vanaf € 45,00</span></div><h3>Kleuren &amp; balayage</h3><p>Uitgroei, highlights, balayage, toner, met Olaplex.</p></article>
+      <article class="card"><div class="ph"><img src="img/c_styling.jpg" alt="Opsteekkapsel" loading="lazy"><span class="from">vanaf € 20,00</span></div><h3>Styling &amp; feest</h3><p>Föhnen, tangen, opsteken of krullen voor elke gelegenheid.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="walkin" id="afspraak">
+  <div class="wrap">
+    <div class="arch"><img src="img/interior.jpg" alt="Binnenkant van de salon" loading="lazy"></div>
+    <div>
+      <div class="eyebrow">Met of zonder afspraak</div>
+      <h2>Geen afspraak? <em>Loop gerust binnen.</em></h2>
+      <p style="color:rgba(255,255,255,.85)">Je bent altijd welkom. Wil je zeker weten dat je op tijd geholpen wordt? Plan vooraf een moment, of neem hierboven plaats in de wachtrij.</p>
+      <div class="hours" id="hours"></div>
+      <div class="btnrow">
+        <a class="btn btn-light" href="#" id="bookBtn">Online afspraak maken</a>
+        <a class="btn btn-ghost" href="tel:0522724019">0522 724 019</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="webshop">
+  <div class="wrap">
+    <div class="shop-box">
+      <div class="shop-top">
+        <img src="img/products.jpg" alt="Artistique haarverzorging" loading="lazy">
+        <div>
+          <div class="eyebrow" style="color:var(--rose-400)">Webshop</div>
+          <h2 style="font-size:clamp(1.9rem,3.4vw,2.7rem);margin:8px 0 12px">Uitsluitend <em>Artistique</em></h2>
+          <p style="color:var(--muted)">Nederlandse haarverzorging uit Deventer, sinds 1995. Volledig vegan en dierproefvrij. Bestel online, haal af in de salon of laat het thuisbezorgen.</p>
+          <div class="tags"><span>Artiplex</span><span>Beach Blonde</span><span>Male Co</span><span>No Yellow</span><span>Orchid</span><span>YouStyle</span><span>Suncare</span></div>
+        </div>
+      </div>
+      <div class="products" id="products"></div>
+    </div>
+  </div>
+</section>
+
+<section id="prijzen" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head"><div><div class="eyebrow">Ervaringen op Google</div><h2>Wat klanten <em>over ons zeggen</em></h2></div></div>
+    <div class="reviews">
+      <div class="rev"><q>Ik kom graag bij deze salon. Er wordt goed naar mij geluisterd en het kleuren is altijd van topkwaliteit.</q><footer>Demi Tromp <span>★★★★★</span></footer></div>
+      <div class="rev"><q>Gebeld en ik kon gelijk terecht. Erg flexibel en makkelijk met afspraken maken!</q><footer>Martijn Nefkens <span>★★★★☆</span></footer></div>
+      <div class="rev"><q>Goede kapper, vriendelijk. Goed geknipt.</q><footer>Gerard Koiter <span>★★★★★</span></footer></div>
+      <div class="rev"><q>Goed en vakkundig geholpen.</q><footer>Guus Straatman <span>★★★★★</span></footer></div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="cta">
+      <h2>Even tijd <em>voor jezelf?</em></h2>
+      <p>Plan je afspraak in een paar klikken, of kom gewoon langs aan het Prinsenplein.</p>
+      <a class="btn btn-light" href="#afspraak">Afspraak maken</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site" id="contact">
+  <div class="wrap">
+    <div class="cols">
+      <div><a class="logo" href="#top"><i><b></b><b></b><b></b></i>KAPPERSHUIS</a><p style="margin-top:10px">Passie, kwaliteit &amp; vakmanschap. Met of zonder afspraak.</p></div>
+      <div><h3>Bezoek ons</h3><p>Prinsenplein 2<br>7941 KW Meppel</p></div>
+      <div><h3>Contact</h3><p>0522 724 019</p></div>
+      <div><h3>Open</h3><p>Ma t/m do 08:30 – 17:30<br>Vrijdag 08:30 – 20:30<br>Zaterdag 08:30 – 16:00</p></div>
+    </div>
+    <div class="copy">© 2026 Kappershuis Meppel · Voorbeeldsite, alle wachtrij- en winkeldata is demo.</div>
+  </div>
+</footer>
+
+<div class="mbar" aria-label="Snelle acties">
+  <a class="p" href="#wachtrij">Wachtrij · <span id="mbarWait">3</span></a>
+  <a href="#afspraak">Afspraak</a>
+  <a href="#webshop">Webshop</a>
+</div>
+
+<aside class="drawer" id="drawer" aria-label="Winkelmand">
+  <button class="close" id="cartClose" aria-label="Sluiten">×</button>
+  <h2>Winkelmand</h2>
+  <ul id="cartList"></ul>
+  <div class="total"><span>Totaal</span><span id="cartTotal">€ 0,00</span></div>
+  <button class="btn btn-primary" id="checkout">Afrekenen (demo)</button>
+</aside>
+<section class="chat" id="chat" aria-label="Chat met Kappershuis" hidden>
+  <div class="chat-head">
+    <div class="avatar" aria-hidden="true"><svg viewBox="0 0 64 64" fill="none" stroke="#1c3a2d" stroke-width="3" stroke-linecap="round"><circle cx="20" cy="46" r="7"/><circle cx="44" cy="46" r="7"/><path d="M25 41 44 12M39 41 20 12"/></svg></div>
+    <div><strong>Kappershuis assistent</strong><small><span class="dot"></span> Online</small></div>
+    <button id="chatClose" aria-label="Chat sluiten">×</button>
+  </div>
+  <div class="chat-log" id="chatLog" aria-live="polite"></div>
+  <div class="chat-chips" id="chatChips"></div>
+  <form class="chat-form" id="chatForm"><input id="chatInput" placeholder="Typ je vraag..." aria-label="Je bericht" autocomplete="off"><button class="btn btn-primary" type="submit">Stuur</button></form>
+</section>
+<div class="demo-tag">Voorbeeldsite · demo-data</div>
+
+<script>
+const $=s=>document.querySelector(s);
+const eur=n=>'€ '+n.toFixed(2).replace('.',',');
+
+/* ---------- Openingstijden ---------- */
+const HOURS=[['Maandag','08:30','17:30'],['Dinsdag','08:30','17:30'],['Woensdag','08:30','17:30'],['Donderdag','08:30','17:30'],['Vrijdag','08:30','20:30'],['Zaterdag','08:30','16:00'],['Zondag',null,null]];
+const todayIdx=(new Date().getDay()+6)%7;
+$('#hours').innerHTML=HOURS.map((h,i)=>`<div class="${i===todayIdx?'today':''}"><span>${h[0]}</span><span>${h[1]?h[1]+' – '+h[2]:'Gesloten'}</span></div>`).join('');
+
+/* ---------- Live wachtrij (demo-simulatie) ---------- */
+const CHAIRS=4, MIN_PER=6;
+let waiting=3, you=0, youName='';
+const names=['A','B','C'];
+function renderQueue(){
+    $('#qWait').textContent=waiting;
+  const busy=Math.min(CHAIRS,2+(waiting>0?1:0)), free=CHAIRS-busy; // demo
+  $('#qChairs').innerHTML=Array.from({length:CHAIRS},(_,i)=>`<i class="${i<busy?'busy':''}"></i>`).join('');
+  $('#qFreeTxt').textContent=free===1?'1 vrije stoel':free+' vrije stoelen';
+  const eta=waiting*MIN_PER;
+  $('#qEta').textContent=waiting===0?'direct':eta+' min';
+  $('#pillTxt').textContent=waiting===0?'Geen wachtrij':`Wachtrij · ${waiting}`;
+  $('#mbarWait').textContent=waiting;
+  let html='';
+  const total=Math.max(waiting,5);
+  for(let i=1;i<=total;i++){
+    const isYou=you&&i===you, filled=i<=waiting;
+    html+=(i>1?'<span class="q-link"></span>':'')+`<span class="seat ${isYou?'you':''} ${filled?'':'empty'}" title="${filled?'Wachtende '+i:'Vrij'}"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></span>`;
+  }
+  $('#qLine').innerHTML=html;
+  if(you){
+    $('#qJoinBtn').textContent=`Je bent nr. ${you} · ± ${you*MIN_PER} min`;
+    $('#qJoinBtn').disabled=true;
+    $('#qNote').textContent=`Tot zo, ${youName}! Blijf in de buurt, we sturen je een seintje.`;
+  }
+}
+$('#qJoinBtn').addEventListener('click',()=>{$('#qForm').classList.add('open');$('#qJoinBtn').style.display='none';$('#qName').focus()});
+$('#qForm').addEventListener('submit',e=>{
+  e.preventDefault();
+  youName=$('#qName').value.trim()||'gast';
+  waiting++; you=waiting;
+  $('#qForm').classList.remove('open'); $('#qJoinBtn').style.display='';
+  renderQueue();
+});
+/* simuleer beweging: iemand wordt geholpen of loopt binnen */
+setInterval(()=>{
+  const r=Math.random();
+  if(r<.45&&waiting>(you?you:0)){ // wachtende wordt geholpen (jij schuift op)
+    waiting--; if(you) you=Math.max(1,you-1);
+  }else if(r>.7&&waiting<6&&!you){waiting++}
+  else if(you&&r<.55&&you>1){you--;waiting=Math.max(waiting-1,you)}
+  renderQueue();
+},9000);
+renderQueue();
+
+/* ---------- Avatar-knoppen ---------- */
+document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{
+  const t=b.dataset.go;
+  if(t==='wachtrij'){
+    $('#bubble').firstChild.textContent=waiting===0?'Nu is er geen wachtrij. Kom gerust langs! ':`Er ${waiting===1?'wacht':'wachten'} nu ${waiting}. Reken op ± ${waiting*MIN_PER} minuten. `;
+  }else document.getElementById(t).scrollIntoView({behavior:'smooth'});
+}));
+$('#bookBtn').addEventListener('click',e=>e.preventDefault());
+
+/* ---------- Chat (demo, vaste antwoorden met live wachtrij-data) ---------- */
+const chat=$('#chat'), log=$('#chatLog');
+const CHIPS=['Hoe druk is het?','Wat kost knippen?','Openingstijden','Afspraak maken','Producten'];
+function say(t,who){const d=document.createElement('div');d.className='msg '+who;d.innerHTML=t;log.appendChild(d);log.scrollTop=log.scrollHeight}
+function isOpenNow(){const h=HOURS[todayIdx];if(!h[1])return false;const n=new Date(),m=n.getHours()*60+n.getMinutes();const f=x=>{const[a,b]=x.split(':');return a*60+ +b};return m>=f(h[1])&&m<f(h[2])}
+function answer(q){
+  q=q.toLowerCase();
+  if(/druk|wacht|rij|lang/.test(q)) return waiting===0?'Er is nu geen wachtrij, je kunt direct terecht.':`Er ${waiting===1?'wacht':'wachten'} nu ${waiting}. Reken op ongeveer ${waiting*MIN_PER} minuten. Wil je plaatsnemen? Doe dat via de knop <a href="#wachtrij">Plaatsnemen</a>.`;
+  if(/kost|prijs|euro|€|tarief/.test(q)) return 'Knippen dames vanaf € 26,00, heren vanaf € 15,00, kleuren vanaf € 45,00 en styling vanaf € 20,00. Kinderen tot en met 12 jaar € 21,00.';
+  if(/open|tijd|dicht|gesloten|uur/.test(q)){const h=HOURS[todayIdx];return `Ma t/m do 08:30 tot 17:30, vrijdag 08:30 tot 20:30, zaterdag 08:30 tot 16:00, zondag gesloten.\nVandaag: ${h[1]?h[1]+' tot '+h[2]:'gesloten'} (${isOpenNow()?'nu open':'nu dicht'}).`}
+  if(/afspraak|plannen|boek|reserv/.test(q)) return 'Een afspraak maken kan online of telefonisch op 0522 724 019. Je kunt ook gewoon binnenlopen of plaatsnemen in de wachtrij. <a href="#afspraak">Naar afspraak maken</a>';
+  if(/product|shampoo|artistique|shop|bestel|kopen/.test(q)) return 'We verkopen uitsluitend Artistique: vegan en dierproefvrij. Bekijk ze in de <a href="#webshop">webshop</a>.';
+  if(/adres|route|waar|parkeer/.test(q)) return 'Je vindt ons aan het Prinsenplein 2, 7941 KW Meppel.';
+  if(/hallo|hoi|hey|dag/.test(q)) return 'Hoi! Waar kan ik je mee helpen?';
+  return 'Dat weet ik zo niet zeker. Bel ons gerust op 0522 724 019, dan helpen we je meteen.';
+}
+function send(t){say(t.replace(/</g,'&lt;'),'me');setTimeout(()=>say(answer(t),'bot'),450)}
+function openChat(){chat.hidden=false;if(!log.children.length){say('Hoi! Ik ben de assistent van Kappershuis. Ik help je met de wachtrij, prijzen, afspraken en producten.','bot')}$('#chatInput').focus()}
+$('#chatChips').innerHTML=CHIPS.map(c=>`<button type="button">${c}</button>`).join('');
+$('#chatChips').addEventListener('click',e=>{if(e.target.matches('button'))send(e.target.textContent)});
+$('#chatOpen').onclick=openChat;
+$('#chatClose').onclick=()=>chat.hidden=true;
+$('#chatForm').addEventListener('submit',e=>{e.preventDefault();const v=$('#chatInput').value.trim();if(v){send(v);$('#chatInput').value=''}});
+
+/* ---------- Webshop ---------- */
+const PRODUCTS=[
+ {n:'Repair Shampoo',s:'Herstellende shampoo · 250 ml',p:12.95,c:'#c9b4d8'},
+ {n:'Hydrate Conditioner',s:'Vochtinbrengend · 250 ml',p:13.95,c:'#9cc7dd'},
+ {n:'Color Leave-in Care',s:'Kleurbescherming · 150 ml',p:15.50,c:'#d9a9b3'},
+ {n:'Hair Mask No. 8',s:'Intensieve haarmasker · 200 ml',p:18.95,c:'#7fc8c2'},
+ {n:'Curl Conditioner',s:'Voor krullen · 250 ml',p:13.95,c:'#8fb7d6'},
+ {n:'Moisture Booster',s:'Haarserum · 100 ml',p:16.95,c:'#d6b48a'},
+ {n:'Beach Blonde Shampoo',s:'Tegen geel · 250 ml',p:12.95,c:'#d8c27a'},
+ {n:'Male Co Styling Paste',s:'Heren · 100 ml',p:11.50,c:'#8a9097'}
+];
+$('#products').innerHTML=PRODUCTS.map((x,i)=>`<div class="prod"><div class="tube" style="background:${x.c}22"><i style="background:${x.c}"></i></div><h3>${x.n}</h3><small>${x.s}</small><div class="row"><span class="price">${eur(x.p)}</span><button class="add" data-i="${i}">In mand</button></div></div>`).join('');
+const cart=[];
+function renderCart(){
+  $('#cartList').innerHTML=cart.length?cart.map((x,i)=>`<li><span>${x.n}</span><span>${eur(x.p)} <button data-rm="${i}">weg</button></span></li>`).join(''):'<p class="empty-cart">Je mand is nog leeg.</p>';
+  $('#cartTotal').textContent=eur(cart.reduce((a,b)=>a+b.p,0));
+  const c=$('#cartCount'); c.textContent=cart.length; c.hidden=!cart.length;
+}
+document.addEventListener('click',e=>{
+  const a=e.target.closest('.add'); if(a){cart.push(PRODUCTS[a.dataset.i]);renderCart();a.classList.add('added');a.textContent='Toegevoegd ✓';setTimeout(()=>{a.classList.remove('added');a.textContent='In mand'},1400);}
+  const r=e.target.closest('[data-rm]'); if(r){cart.splice(+r.dataset.rm,1);renderCart()}
+});
+$('#cartOpen').onclick=()=>$('#drawer').classList.add('open');
+$('#cartClose').onclick=()=>$('#drawer').classList.remove('open');
+$('#checkout').onclick=()=>{$('#checkout').textContent='Demo: hier komt de betaalstap'};
+renderCart();
+</script>
+</body>
+</html>
