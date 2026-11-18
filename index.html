@@ -287,7 +287,7 @@ footer.site p{color:var(--muted)}
 
 @media(max-width:900px){
   .hero p.lead{display:none}
-  .hero .wrap{padding-bottom:178px}
+  .hero .wrap{padding-bottom:236px}
   .hero-left{padding-bottom:0}
   .q-actions{display:none}
   .assist{flex-direction:row;align-items:flex-end;gap:10px;bottom:calc(84px + env(safe-area-inset-bottom,0px))}
@@ -311,6 +311,13 @@ footer.site p{color:var(--muted)}
   .nav-actions svg{width:19px;height:19px}
   .q-actions{display:none}
 }
+
+/* praatwolk met vier opties */
+.bubble{cursor:default;max-width:250px}
+.bubble .opts{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.bubble .opts button{font:700 .78rem var(--sans);color:#fff;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.8);border-radius:999px;padding:.35rem .85rem;cursor:pointer;margin:0;text-shadow:none}
+.bubble .opts button:hover{background:#fff;color:var(--green-900)}
+@media(max-width:900px){.bubble{max-width:calc(100vw - 110px)}}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -364,7 +371,7 @@ footer.site p{color:var(--muted)}
 <!-- Schaartje + popup: sticky linksonder in beeld -->
 <div class="assist" id="assist">
   <button class="avatar" id="avatarBtn" type="button" aria-expanded="false" aria-controls="bubble" aria-label="Assistent tonen of verbergen"><img src="img/avatar.jpg" alt=""></button>
-  <button class="bubble" id="bubble" type="button" aria-label="Chat openen"><span id="bubbleTxt">Hoi! Ik help je kiezen: <b>wachten</b>, <b>afspraak</b> of <b>producten</b>.</span></button>
+  <div class="bubble" id="bubble"><span id="bubbleTxt">Hoi! Ik help je kiezen:</span><div class="opts"><button type="button" data-opt="knippen">Knippen</button><button type="button" data-opt="chat">Chatten</button><button type="button" data-opt="webshop">Webshop</button><button type="button" data-opt="afspraak">Afspraak</button></div></div>
 </div>
 
 <section id="behandelingen">
@@ -561,7 +568,13 @@ function send(t){say(t.replace(/</g,'&lt;'),'me');setTimeout(()=>say(answer(t),'
 function openChat(){chat.hidden=false;if(!log.children.length){say('Hoi! Ik ben de assistent van Kappershuis. Ik help je met de wachtrij, prijzen, afspraken en producten.','bot')}$('#chatInput').focus()}
 $('#chatChips').innerHTML=CHIPS.map(c=>`<button type="button">${c}</button>`).join('');
 $('#chatChips').addEventListener('click',e=>{if(e.target.matches('button'))send(e.target.textContent)});
-$('#bubble').addEventListener('click',()=>{touched=true;setBubble(false);openChat()});
+$('#bubble').addEventListener('click',e=>{
+  const b=e.target.closest('[data-opt]'); if(!b) return; touched=true; const o=b.dataset.opt; setBubble(false);
+  if(o==='chat') openChat();
+  else if(o==='afspraak') openSheet();
+  else if(o==='webshop') document.getElementById('webshop').scrollIntoView({behavior:'smooth'});
+  else if(o==='knippen'){window.scrollTo({top:0,behavior:'smooth'});const j=$('#qJoinBtn');j.focus({preventScroll:true});j.animate([{transform:'scale(1)'},{transform:'scale(1.06)'},{transform:'scale(1)'}],{duration:600,iterations:2})}
+});
 $('#chatClose').onclick=()=>{chat.hidden=true;setBubble(true)};
 $('#chatForm').addEventListener('submit',e=>{e.preventDefault();const v=$('#chatInput').value.trim();if(v){send(v);$('#chatInput').value=''}});
 
