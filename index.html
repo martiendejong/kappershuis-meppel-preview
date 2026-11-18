@@ -304,7 +304,6 @@ footer.site p{color:var(--muted)}
 @media(min-width:901px){
   header{position:fixed;transition:background .3s,backdrop-filter .3s}
   header .wrap{max-width:none;padding-left:28px;padding-right:28px}
-  header.solid{background:rgba(18,38,29,.86);backdrop-filter:blur(10px)}
   .nav-actions{display:flex;gap:10px;margin-left:auto;margin-right:14px}
   .nav-actions a,.nav-actions button{font:700 .95rem var(--sans);display:flex;align-items:center;gap:9px;color:#fff;background:rgba(14,30,23,.25);border:1.5px solid rgba(255,255,255,.8);border-radius:999px;height:46px;padding:0 1.3rem;text-decoration:none;cursor:pointer;backdrop-filter:blur(4px);text-shadow:0 1px 8px rgba(0,0,0,.5)}
   .nav-actions a:hover,.nav-actions button:hover{background:rgba(255,255,255,.18)}
@@ -318,6 +317,11 @@ footer.site p{color:var(--muted)}
 .bubble .opts button{font:700 .78rem var(--sans);color:#fff;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.8);border-radius:999px;padding:.35rem .85rem;cursor:pointer;margin:0;text-shadow:none}
 .bubble .opts button:hover{background:#fff;color:var(--green-900)}
 @media(max-width:900px){.bubble{max-width:calc(100vw - 110px)}}
+
+/* header blijft transparant; kleur past zich aan de sectie eronder aan */
+header .logo,header .burger,.nav-actions a,.nav-actions button{transition:color .25s,border-color .25s,background .25s}
+header.on-light .logo{color:var(--green-900);text-shadow:none}
+header.on-light .burger,header.on-light .nav-actions a,header.on-light .nav-actions button{color:var(--green-900);border-color:rgba(28,58,45,.55);background:rgba(255,255,255,.35);text-shadow:none;backdrop-filter:none}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -659,7 +663,21 @@ sheet.addEventListener('click',e=>{if(e.target===sheet)closeSheet()});
 ['#barAfspraak','#headAfspraak','#afspraakBtn','#bookBtn'].forEach(sel=>{const el=document.querySelector(sel);if(el)el.addEventListener('click',e=>{e.preventDefault();openSheet()})});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
 
-addEventListener('scroll',()=>document.querySelector('header').classList.toggle('solid',scrollY>60),{passive:true});
+let toneTick=false;
+function headerTone(){
+  toneTick=false; let light=false;
+  for(const el of document.elementsFromPoint(90,34)){
+    if(el.closest('header')||el.closest('.menu')) continue;
+    for(let n=el;n&&n!==document.documentElement;n=n.parentElement){
+      const m=getComputedStyle(n).backgroundColor.match(/[\d.]+/g);
+      if(m&&(m.length<4||+m[3]>.5)){light=(.299*m[0]+.587*m[1]+.114*m[2])>140;break}
+    }
+    break;
+  }
+  document.querySelector('header').classList.toggle('on-light',light);
+}
+addEventListener('scroll',()=>{if(!toneTick){toneTick=true;requestAnimationFrame(headerTone)}},{passive:true});
+headerTone();
 </script>
 </body>
 </html>
