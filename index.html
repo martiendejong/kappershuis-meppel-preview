@@ -33,64 +33,65 @@ h1 em,h2 em{font-style:italic}
 .btn-outline{border-color:var(--green-700);color:var(--green-700);background:transparent}
 :focus-visible{outline:3px solid var(--rose-400);outline-offset:2px}
 
-/* header */
-header{position:sticky;top:0;z-index:50;background:rgba(250,246,242,.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(0,0,0,.06)}
-.nav{display:flex;align-items:center;gap:20px;height:68px}
-.logo{font:700 1.15rem var(--sans);letter-spacing:.04em;text-decoration:none;color:var(--green-900);display:flex;align-items:center;gap:10px}
+/* header: alleen logo, transparant over de foto */
+header{position:absolute;top:0;left:0;right:0;z-index:50;background:transparent}
+.nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{font:700 1.15rem var(--sans);letter-spacing:.06em;text-decoration:none;color:#fff;display:flex;align-items:center;gap:10px;text-shadow:0 1px 14px rgba(0,0,0,.5)}
 .logo i{display:inline-flex;gap:3px}.logo i b{width:9px;height:9px;border-radius:50%;background:var(--rose-400)}
-.nav nav{margin-left:auto;display:flex;gap:22px;font-size:.92rem;font-weight:500}
-.nav nav a{text-decoration:none;color:var(--muted)}.nav nav a:hover{color:var(--green-900)}
-.pill-live{display:inline-flex;align-items:center;gap:8px;font:700 .82rem var(--sans);padding:.5rem .9rem;border-radius:999px;background:#e6f3ec;color:var(--green-900);text-decoration:none}
+footer.site .logo{color:var(--green-900);text-shadow:none}
+.burger{background:rgba(0,0,0,.25);color:#fff;border:1.5px solid rgba(255,255,255,.7);border-radius:999px;width:46px;height:46px;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(6px)}
+.burger svg{width:22px;height:22px}
+.menu{position:fixed;inset:0;z-index:100;background:rgba(18,38,29,.97);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:80px max(24px,8vw);gap:6px;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.menu.open{opacity:1;visibility:visible}
+.menu a,.menu button.mi{font:400 clamp(1.8rem,5vw,3rem) var(--serif);color:#fff;text-decoration:none;background:none;border:0;cursor:pointer;padding:.2rem 0;text-align:left}
+.menu a:hover,.menu button.mi:hover{color:var(--rose-200);font-style:italic}
+.menu .mi-sub{font:700 .78rem var(--sans);letter-spacing:.14em;text-transform:uppercase;color:#8fd0ad;margin:0 0 10px}
+.menu .m-cta{margin-top:18px;font:700 1rem var(--sans);background:#fff;color:var(--green-900);border-radius:999px;padding:.9rem 1.6rem}
+.menu .m-cta:hover{color:var(--green-900);font-style:normal;background:var(--rose-200)}
+.menu-close{position:absolute;top:11px;right:max(16px,env(safe-area-inset-right,0px));background:none;border:1.5px solid rgba(255,255,255,.6);color:#fff;border-radius:999px;width:46px;height:46px;font-size:1.6rem;cursor:pointer}
+.cc{display:inline-grid;place-items:center;vertical-align:middle;margin-left:8px;background:var(--rose-400);color:#fff;border-radius:999px;font:700 .8rem var(--sans);min-width:24px;height:24px;padding:0 6px}
+.cc[hidden]{display:none}
 .dot{width:8px;height:8px;border-radius:50%;background:var(--live);box-shadow:0 0 0 0 rgba(58,165,107,.6);animation:pulse 2s infinite}
 @keyframes pulse{70%{box-shadow:0 0 0 8px rgba(58,165,107,0)}100%{box-shadow:0 0 0 0 rgba(58,165,107,0)}}
-.cartbtn{position:relative;background:none;border:1.5px solid rgba(0,0,0,.12);border-radius:999px;width:42px;height:42px;cursor:pointer;display:grid;place-items:center;font-size:1.05rem}
-.cartbtn span[hidden]{display:none}
-.cartbtn span{position:absolute;top:-6px;right:-6px;background:var(--rose-400);color:#fff;border-radius:999px;font:700 .68rem var(--sans);min-width:19px;height:19px;display:grid;place-items:center;padding:0 4px}
 
-/* hero */
-.hero{position:relative;color:#fff;overflow:hidden;background:var(--green-900)}
-.hero-bg{position:absolute;inset:0;background:url(img/hero.jpg) right center/cover}
-.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(95deg,rgba(18,38,29,.95) 0%,rgba(18,38,29,.7) 40%,rgba(18,38,29,.08) 100%)}
-.hero .wrap{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;padding-top:56px;padding-bottom:64px}
-.hero h1{font-size:clamp(2.4rem,5vw,4rem);margin:14px 0 18px}
+/* hero: foto schermvullend, tekst linksonder, wachtrij rechtsonder */
+.hero{position:relative;color:#fff;overflow:hidden;background:var(--green-900);min-height:100svh}
+.hero-bg{position:absolute;inset:0;background:url(img/hero.jpg) center 30%/cover}
+.hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(14,30,23,.78) 0%,rgba(14,30,23,.3) 38%,rgba(14,30,23,0) 65%),linear-gradient(180deg,rgba(14,30,23,.45) 0%,rgba(14,30,23,0) 20%),linear-gradient(90deg,rgba(14,30,23,.35) 0%,rgba(14,30,23,0) 55%)}
+.hero .wrap{position:relative;min-height:100svh;display:flex;align-items:flex-end;justify-content:space-between;gap:40px;padding-top:96px;padding-bottom:44px}
+.hero-left{max-width:34rem}
+.hero h1{font-size:clamp(2.4rem,4.6vw,3.9rem);margin-bottom:14px;text-shadow:0 2px 24px rgba(0,0,0,.45)}
 .hero h1 em{color:var(--rose-200)}
-.hero p.lead{max-width:30rem;color:rgba(255,255,255,.88);font-size:1.05rem}
-.assist{display:flex;align-items:flex-end;gap:14px;margin-top:34px}
-.avatar{flex:none;width:92px;height:92px;border-radius:50%;background:linear-gradient(160deg,var(--rose-200),var(--rose-400));border:3px solid rgba(255,255,255,.85);display:grid;place-items:center;overflow:hidden;position:relative}
-.avatar svg{width:70%;height:70%}
-.bubble{background:#fff;color:var(--ink);border-radius:18px 18px 18px 4px;padding:12px 16px;max-width:19rem;font-size:.95rem;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.hero p.lead{max-width:28rem;color:rgba(255,255,255,.92);font-size:1.05rem;text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.assist{position:fixed;left:max(16px,env(safe-area-inset-left,0px));bottom:max(18px,env(safe-area-inset-bottom,0px));z-index:80;display:flex;align-items:center;gap:14px}
+.avatar{flex:none;width:72px;height:72px;border-radius:50%;background:linear-gradient(160deg,var(--rose-200),var(--rose-400));border:3px solid rgba(255,255,255,.9);display:grid;place-items:center;cursor:pointer;padding:0;box-shadow:0 8px 24px rgba(0,0,0,.35);transition:transform .15s}
+.avatar:hover{transform:scale(1.06)}
+.avatar svg{width:56%;height:56%}
+.bubble{background:#fff;color:var(--ink);border-radius:18px 18px 18px 4px;padding:12px 16px;max-width:20rem;font-size:.95rem;box-shadow:0 10px 30px rgba(0,0,0,.3);opacity:0;transform:translateY(8px) scale(.97);transform-origin:left center;pointer-events:none;visibility:hidden;transition:opacity .35s,transform .35s,visibility .35s}
+.bubble.show{opacity:1;transform:none;pointer-events:auto;visibility:visible}
 .bubble b{color:var(--green-700)}
 .bubble button{margin-top:8px;margin-right:6px;font:700 .78rem var(--sans);border:1.5px solid var(--green-700);color:var(--green-700);background:transparent;border-radius:999px;padding:.3rem .7rem;cursor:pointer}
 .bubble button:hover{background:var(--green-700);color:#fff}
 
-/* queue card */
-.queue{background:#fff;color:var(--ink);border-radius:var(--radius);padding:22px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
-.q-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.q-head h2{font-size:1.55rem;display:flex;align-items:center;gap:10px}
-.live{display:inline-flex;align-items:center;gap:7px;font:700 .75rem var(--sans);background:#e6f3ec;color:var(--green-900);padding:.3rem .7rem;border-radius:999px}
-.q-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.q-stat{background:var(--cream);border-radius:14px;padding:10px 14px}
-.q-stat strong{display:block;font:500 1.8rem var(--serif);color:var(--green-900);line-height:1.1}
-.q-stat span{font-size:.8rem;color:var(--muted)}
-.q-line{display:flex;align-items:center;gap:6px;margin:16px 0 6px;min-height:58px;overflow-x:auto}
-.seat{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font:700 .85rem var(--sans);background:var(--rose-200);color:var(--green-900);border:2px solid #fff;box-shadow:0 0 0 1.5px var(--rose-200);position:relative;transition:all .4s}
-.seat.you{background:var(--green-700);color:#fff;box-shadow:0 0 0 2px var(--green-700)}
-.seat.you::after{content:"Jij";position:absolute;top:-19px;left:50%;transform:translateX(-50%);font-size:.68rem;background:var(--green-700);color:#fff;padding:1px 7px;border-radius:999px}
-.seat.empty{background:transparent;border:2px dashed #d8d2cb;box-shadow:none;color:#c0b9b1}
-.chairs{display:flex;gap:8px;height:2.2rem;align-items:center}
-.chairs i{width:22px;height:22px;border-radius:50%;border:2px solid var(--green-500);background:transparent}
-.chairs i.busy{background:var(--green-700);border-color:var(--green-700)}
-.q-link{width:10px;height:2px;background:#e3ddd6;flex:none}
-.q-eta{display:flex;justify-content:space-between;align-items:center;background:var(--cream);border-radius:14px;padding:10px 14px;margin:10px 0 14px;font-size:.92rem}
-.q-eta b{font:500 1.15rem var(--serif);color:var(--green-900)}
-.q-join{width:100%;font-size:1.02rem;padding:1rem}
-.q-form{display:none;gap:8px;margin-top:0}
+/* wachtrij: alleen poppetjes, stoelen, knop */
+.queue{flex:none;width:min(360px,100%);display:flex;flex-direction:column;gap:16px;text-shadow:0 1px 12px rgba(0,0,0,.5)}
+.q-people{display:flex;align-items:flex-end;gap:10px;min-height:52px;flex-wrap:wrap}
+.q-people svg{width:30px;height:48px;color:#fff;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4));transition:transform .3s}
+.q-people svg.you{color:var(--rose-200);transform:scale(1.15)}
+.q-chairs{display:flex;gap:14px}
+.q-chairs i{width:54px;height:54px;border-radius:50%;background:#3ecf7a;box-shadow:0 4px 14px rgba(0,0,0,.35),inset 0 0 0 3px rgba(255,255,255,.35);transition:background .4s}
+.q-chairs i.busy{background:#e5484d}
+.q-join{width:100%;font-size:1.05rem;padding:1rem 1.4rem;background:#fff;color:var(--green-900);justify-content:space-between;text-shadow:none}
+.q-join:disabled{opacity:1;cursor:default}
+.q-join:disabled:hover{transform:none}
+.q-form{display:none;gap:8px}
 .q-form.open{display:flex}
 .q-form input{flex:1;min-width:0;font:500 1rem var(--sans);border:1.5px solid #d8d2cb;border-radius:999px;padding:.8rem 1.1rem}
-.q-note{font-size:.76rem;color:var(--muted);margin-top:10px;text-align:center}
-.q-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
-.q-actions .btn{border-radius:16px;justify-content:space-between;padding:.9rem 1.1rem}
-.btn-shop{background:var(--rose-200);color:var(--green-900)}
+.q-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.q-actions .btn{border-radius:999px;justify-content:center;padding:.8rem 1rem;text-shadow:none}
+.q-actions .btn-light{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.75)}
+.q-actions .btn-shop{background:rgba(243,223,214,.95);color:var(--green-900)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 /* sections */
 section{padding:80px 0}
@@ -190,10 +191,12 @@ footer.site p{color:var(--muted)}
 @media(max-width:900px){.chat{right:8px;left:8px;width:auto;max-width:none;bottom:76px;height:min(70vh,520px)}}
 
 @media(max-width:900px){
-  .nav nav{display:none}.nav{gap:10px}.nav .pill-live{margin-left:auto}.hide-sm{display:none}
-  .hero .wrap{grid-template-columns:1fr;gap:28px;padding-top:36px;padding-bottom:40px}
-  .hero-bg::after{background:linear-gradient(180deg,rgba(18,38,29,.86),rgba(18,38,29,.7))}
-  .assist{margin-top:22px}
+  .hero,.hero .wrap{min-height:calc(100svh - 66px)}
+  .hero .wrap{flex-direction:column;align-items:stretch;justify-content:flex-end;gap:22px;padding-top:84px;padding-bottom:22px}
+  .hero-bg{background-position:60% 25%}
+  .hero-bg::after{background:linear-gradient(0deg,rgba(14,30,23,.88) 0%,rgba(14,30,23,.55) 55%,rgba(14,30,23,.2) 100%)}
+  .queue{width:100%}
+  .q-chairs i{width:46px;height:46px}
   .cards,.products,.reviews{grid-template-columns:1fr 1fr}
   .walkin .wrap,.shop-top{grid-template-columns:1fr;gap:28px}
   .arch{max-width:420px}
@@ -211,31 +214,21 @@ footer.site p{color:var(--muted)}
   .cards{gap:12px}.products{grid-template-columns:1fr 1fr;gap:10px}.reviews{grid-template-columns:1fr}
   .wrap{padding:0 16px}
   .bubble{max-width:none}
-  .hero p.lead{display:none}
-  .avatar{width:72px;height:72px}
+  .hero p.lead{font-size:.95rem}
+  .avatar{width:60px;height:60px}
+  .assist{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .bubble{max-width:calc(100vw - 110px)}
 }
 
-/* queue: tekst op transparante achtergrond, foto meer zichtbaar */
-.queue{background:transparent;color:#fff;box-shadow:none;padding:8px 0;text-shadow:0 1px 12px rgba(0,0,0,.55)}
-.queue .live{background:rgba(255,255,255,.14);color:#fff}
-.q-head h2{color:#fff}
-.q-stat,.q-eta{background:transparent;border:0;border-bottom:1px solid rgba(255,255,255,.28);border-radius:0;padding-left:0;padding-right:0}
-.q-stat strong,.q-eta b{color:#fff}
-.q-stat span,.q-note,.q-eta span{color:rgba(255,255,255,.85)}
-.chairs i{border-color:#fff}.chairs i.busy{background:#fff;border-color:#fff}
-.seat{background:transparent;color:#fff;border:2px solid rgba(255,255,255,.85);box-shadow:none}
-.seat.empty{border:2px dashed rgba(255,255,255,.4);color:rgba(255,255,255,.45)}
-.seat.you{background:var(--rose-200);color:var(--green-900);border-color:var(--rose-200);box-shadow:none;text-shadow:none}
-.seat.you::after{background:var(--rose-200);color:var(--green-900);text-shadow:none;top:-21px}
-.q-link{background:rgba(255,255,255,.35)}
-.q-line{padding-top:22px;margin-top:8px}
-.queue .btn-primary{background:#fff;color:var(--green-900);text-shadow:none}
-.queue .btn-primary:disabled{opacity:1}
-.q-form input{background:rgba(255,255,255,.92)}
-.q-actions .btn-light{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.7)!important;text-shadow:none}
-.q-actions .btn-shop{background:rgba(243,223,214,.95);text-shadow:none}
-.hero-bg::after{background:linear-gradient(95deg,rgba(18,38,29,.82) 0%,rgba(18,38,29,.5) 42%,rgba(18,38,29,.12) 100%)}
-@media(max-width:900px){.hero-bg::after{background:linear-gradient(180deg,rgba(18,38,29,.7),rgba(18,38,29,.5))}}
+/* sticky assistent: ruimte vrijhouden en demo-label naar rechts */
+.hero-left{padding-bottom:150px}
+.demo-tag{left:auto;right:14px}
+@media(max-width:900px){
+  .hero .wrap{padding-bottom:96px}
+  .hero-left{padding-bottom:0}
+  .assist{flex-direction:column-reverse;align-items:flex-start;gap:10px}
+  .bubble{border-radius:18px 18px 18px 4px}
+}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -244,65 +237,60 @@ footer.site p{color:var(--muted)}
 <header>
   <div class="wrap nav">
     <a class="logo" href="#top"><i><b></b><b></b><b></b></i>KAPPERSHUIS</a>
-    <nav aria-label="Hoofdmenu">
-      <a href="#behandelingen">Behandelingen</a>
-      <a href="#prijzen">Prijzen</a>
-      <a href="#webshop">Webshop</a>
-      <a href="#contact">Contact</a>
-    </nav>
-    <a class="pill-live" href="#wachtrij"><span class="dot"></span><span id="pillTxt">Wachtrij</span></a>
-    <button class="cartbtn" id="cartOpen" aria-label="Winkelmand"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span id="cartCount" hidden>0</span></button>
-    <a class="btn btn-primary hide-sm" href="#afspraak">Afspraak maken</a>
+    <button class="burger" id="burger" type="button" aria-label="Menu openen" aria-expanded="false" aria-controls="menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
   </div>
 </header>
+<nav class="menu" id="menu" aria-label="Hoofdmenu">
+  <button class="menu-close" id="menuClose" type="button" aria-label="Menu sluiten">&times;</button>
+  <p class="mi-sub">Kappershuis Meppel</p>
+  <a href="#behandelingen">Behandelingen</a>
+  <a href="#prijzen">Prijzen</a>
+  <a href="#webshop">Webshop</a>
+  <button class="mi" id="cartOpen" type="button">Winkelmand<span class="cc" id="cartCount" hidden>0</span></button>
+  <a href="#contact">Contact</a>
+  <a class="m-cta" href="#afspraak">Afspraak maken</a>
+</nav>
 
 <main id="top">
-<!-- HERO: avatar + live wachtrij + afspraak + webshop -->
+<!-- HERO: foto schermvullend, tekst + schaartje linksonder, wachtrij rechtsonder -->
 <div class="hero">
   <div class="hero-bg" role="img" aria-label="Kappershuis aan het Prinsenplein in Meppel"></div>
   <div class="wrap">
-    <div>
-      <div class="eyebrow" style="color:#8fd0ad">Kapsalon in hartje Meppel</div>
+    <div class="hero-left">
       <h1>Passie, kwaliteit <em>&amp; vakmanschap</em></h1>
       <p class="lead">Bij Kappershuis word je op je eigen manier geholpen door ervaren kappers. Loop gewoon binnen, plan vooraf een moment of neem plaats in de wachtrij.</p>
-      <div class="assist">
-        <div class="avatar" aria-hidden="true" title="Plaats voor de Kappershuis-avatar">
-          <svg viewBox="0 0 64 64" fill="none" stroke="#1c3a2d" stroke-width="3" stroke-linecap="round"><circle cx="20" cy="46" r="7"/><circle cx="44" cy="46" r="7"/><path d="M25 41 44 12M39 41 20 12"/></svg>
-        </div>
-        <div class="bubble" id="bubble">
-          Hoi! Ik help je kiezen: <b>wachten</b>, <b>afspraak</b> of <b>producten</b>.
-          <div>
-            <button data-go="wachtrij">Hoe druk is het?</button>
-            <button data-go="afspraak">Afspraak</button>
-            <button data-go="webshop">Producten</button>
-            <button class="chatbtn" id="chatOpen">💬 Chat</button>
-          </div>
-        </div>
-      </div>
     </div>
 
-    <aside class="queue" id="wachtrij" aria-label="Live wachtrij">
-      <div class="q-head">
-        <h2>Wachtrij</h2>
-        <span class="live"><span class="dot"></span>Live</span>
-      </div>
-      <div class="q-stats">
-        <div class="q-stat"><strong id="qWait">3</strong><span>wachtenden</span></div>
-        <div class="q-stat"><div class="chairs" id="qChairs" aria-hidden="true"></div><span id="qFreeTxt">1 vrije stoel</span></div>
-      </div>
-      <div class="q-line" id="qLine" aria-label="Positie in de wachtrij"></div>
-      <div class="q-eta"><span>Geschatte wachttijd</span><b id="qEta">18 min</b></div>
-      <button class="btn btn-primary q-join" id="qJoinBtn">+ Plaatsnemen</button>
+    <aside class="queue" id="wachtrij" aria-label="Wachtrij">
+      <div class="q-people" id="qPeople" role="img" aria-label="Wachtenden"></div>
+      <div class="q-chairs" id="qChairs" role="img" aria-label="Stoelen"></div>
+      <span class="sr" id="qSr" aria-live="polite"></span>
+      <button class="btn q-join" id="qJoinBtn" type="button"></button>
       <form class="q-form" id="qForm">
         <input id="qName" type="text" placeholder="Je voornaam" maxlength="20" aria-label="Je voornaam" required>
         <button class="btn btn-primary" type="submit">Bevestig</button>
       </form>
-      <p class="q-note" id="qNote">Geen account nodig. We sturen je een seintje als je bijna aan de beurt bent.</p>
       <div class="q-actions">
-        <a class="btn btn-light" style="border-color:#e3ddd6" href="#afspraak" id="afspraakBtn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></svg> Afspraak maken</a>
-        <a class="btn btn-shop" href="#webshop"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg> Webshop</a>
+        <a class="btn btn-light" href="#afspraak" id="afspraakBtn">Afspraak maken</a>
+        <a class="btn btn-shop" href="#webshop">Webshop</a>
       </div>
     </aside>
+  </div>
+</div>
+
+<!-- Schaartje + popup: sticky linksonder in beeld -->
+<div class="assist" id="assist">
+  <button class="avatar" id="avatarBtn" type="button" aria-expanded="false" aria-controls="bubble" aria-label="Open de assistent">
+    <svg viewBox="0 0 64 64" fill="none" stroke="#1c3a2d" stroke-width="3.5" stroke-linecap="round"><circle cx="20" cy="46" r="7"/><circle cx="44" cy="46" r="7"/><path d="M25 41 44 12M39 41 20 12"/></svg>
+  </button>
+  <div class="bubble" id="bubble">
+    <span id="bubbleTxt">Hoi! Ik help je kiezen: <b>wachten</b>, <b>afspraak</b> of <b>producten</b>.</span>
+    <div>
+      <button data-go="wachtrij">Hoe druk is het?</button>
+      <button data-go="afspraak">Afspraak</button>
+      <button data-go="webshop">Producten</button>
+      <button class="chatbtn" id="chatOpen">Chat</button>
+    </div>
   </div>
 </div>
 
@@ -426,28 +414,16 @@ $('#hours').innerHTML=HOURS.map((h,i)=>`<div class="${i===todayIdx?'today':''}">
 /* ---------- Live wachtrij (demo-simulatie) ---------- */
 const CHAIRS=4, MIN_PER=6;
 let waiting=3, you=0, youName='';
-const names=['A','B','C'];
+const PERSON='<svg viewBox="0 0 30 48" fill="currentColor" aria-hidden="true"><circle cx="15" cy="8" r="7"/><path d="M15 17c-6 0-10 3-10 8v10h4v11h6V36v11h6V35h4V25c0-5-4-8-10-8z"/></svg>';
 function renderQueue(){
-    $('#qWait').textContent=waiting;
-  const busy=Math.min(CHAIRS,2+(waiting>0?1:0)), free=CHAIRS-busy; // demo
+  const busy=Math.min(CHAIRS,2+(waiting>0?1:0)); // demo
   $('#qChairs').innerHTML=Array.from({length:CHAIRS},(_,i)=>`<i class="${i<busy?'busy':''}"></i>`).join('');
-  $('#qFreeTxt').textContent=free===1?'1 vrije stoel':free+' vrije stoelen';
-  const eta=waiting*MIN_PER;
-  $('#qEta').textContent=waiting===0?'direct':eta+' min';
-  $('#pillTxt').textContent=waiting===0?'Geen wachtrij':`Wachtrij · ${waiting}`;
+  $('#qPeople').innerHTML=Array.from({length:waiting},(_,i)=>PERSON.replace('<svg','<svg class="'+(you&&i+1===you?'you':'')+'"')).join('');
+  $('#qSr').textContent=`${waiting} wachtend, ${busy} van ${CHAIRS} stoelen bezet`;
   $('#mbarWait').textContent=waiting;
-  let html='';
-  const total=Math.max(waiting,5);
-  for(let i=1;i<=total;i++){
-    const isYou=you&&i===you, filled=i<=waiting;
-    html+=(i>1?'<span class="q-link"></span>':'')+`<span class="seat ${isYou?'you':''} ${filled?'':'empty'}" title="${filled?'Wachtende '+i:'Vrij'}"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7z"/></svg></span>`;
-  }
-  $('#qLine').innerHTML=html;
-  if(you){
-    $('#qJoinBtn').textContent=`Je bent nr. ${you} · ± ${you*MIN_PER} min`;
-    $('#qJoinBtn').disabled=true;
-    $('#qNote').textContent=`Tot zo, ${youName}! Blijf in de buurt, we sturen je een seintje.`;
-  }
+  const btn=$('#qJoinBtn');
+  if(you){btn.innerHTML=`<span>Je bent nr. ${you}</span><span>~${you*MIN_PER}m</span>`;btn.disabled=true}
+  else{btn.disabled=false;btn.innerHTML=waiting===0?'<span>&rarr; wachtrij</span><span>direct</span>':`<span>&rarr; wachtrij</span><span>~${waiting*MIN_PER}m</span>`}
 }
 $('#qJoinBtn').addEventListener('click',()=>{$('#qForm').classList.add('open');$('#qJoinBtn').style.display='none';$('#qName').focus()});
 $('#qForm').addEventListener('submit',e=>{
@@ -460,22 +436,25 @@ $('#qForm').addEventListener('submit',e=>{
 /* simuleer beweging: iemand wordt geholpen of loopt binnen */
 setInterval(()=>{
   const r=Math.random();
-  if(r<.45&&waiting>(you?you:0)){ // wachtende wordt geholpen (jij schuift op)
-    waiting--; if(you) you=Math.max(1,you-1);
-  }else if(r>.7&&waiting<6&&!you){waiting++}
+  if(r<.45&&waiting>(you?you:0)){waiting--; if(you) you=Math.max(1,you-1)}
+  else if(r>.7&&waiting<6&&!you){waiting++}
   else if(you&&r<.55&&you>1){you--;waiting=Math.max(waiting-1,you)}
   renderQueue();
 },9000);
 renderQueue();
 
-/* ---------- Avatar-knoppen ---------- */
+/* ---------- Schaartje: witte balk aan/uit, na ~5 s zichtbaar ---------- */
+const bubble=$('#bubble'), avatarBtn=$('#avatarBtn');
+let touched=false;
+function setBubble(on){bubble.classList.toggle('show',on);avatarBtn.setAttribute('aria-expanded',on)}
+avatarBtn.addEventListener('click',()=>{touched=true;setBubble(!bubble.classList.contains('show'))});
+setTimeout(()=>{if(!touched)setBubble(true)},5000);
 document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',()=>{
   const t=b.dataset.go;
   if(t==='wachtrij'){
-    $('#bubble').firstChild.textContent=waiting===0?'Nu is er geen wachtrij. Kom gerust langs! ':`Er ${waiting===1?'wacht':'wachten'} nu ${waiting}. Reken op ± ${waiting*MIN_PER} minuten. `;
+    $('#bubbleTxt').textContent=waiting===0?'Nu is er geen wachtrij. Kom gerust langs! ':`Er ${waiting===1?'wacht':'wachten'} nu ${waiting}. Reken op ongeveer ${waiting*MIN_PER} minuten. `;
   }else document.getElementById(t).scrollIntoView({behavior:'smooth'});
 }));
-$('#bookBtn').addEventListener('click',e=>e.preventDefault());
 
 /* ---------- Chat (demo, vaste antwoorden met live wachtrij-data) ---------- */
 const chat=$('#chat'), log=$('#chatLog');
@@ -527,6 +506,13 @@ $('#cartOpen').onclick=()=>$('#drawer').classList.add('open');
 $('#cartClose').onclick=()=>$('#drawer').classList.remove('open');
 $('#checkout').onclick=()=>{$('#checkout').textContent='Demo: hier komt de betaalstap'};
 renderCart();
+/* ---------- Hamburger-menu ---------- */
+const menu=$('#menu'), burger=$('#burger');
+function setMenu(on){menu.classList.toggle('open',on);burger.setAttribute('aria-expanded',on)}
+burger.addEventListener('click',()=>setMenu(true));
+$('#menuClose').addEventListener('click',()=>setMenu(false));
+menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){setMenu(false);$('#drawer').classList.remove('open')}});
 </script>
 </body>
 </html>
